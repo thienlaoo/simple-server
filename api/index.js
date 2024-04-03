@@ -6,6 +6,9 @@ const { Server } = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
+
+app.use(cors());
+
 const io = new Server(server, {
     cors: {
         origin: '*',
@@ -17,7 +20,6 @@ const io = new Server(server, {
 
 app.use(express.json());
 app.use(express.static('public'));
-app.use(cors());
 
 const apikey = process.env.API_KEY;
 let messages = [];
