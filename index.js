@@ -28,7 +28,7 @@ const io = new Server(server, {
 app.use(express.json());
 app.use(express.static('public'));
 
-const apikey = process.env.API_KEY;
+const apikey = 'FM3HEZSXBHBNJYQUEI3W5IIEWRU58AEKG6';
 let messages = [];
 let rooms = {};
 
