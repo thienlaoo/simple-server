@@ -45,35 +45,35 @@ app.post('/process-txid', async (req, res) => {
     }
 });
 
-io.on('connection', (socket) => {
-    socket.emit('initial-messages', messages);
-
-    socket.on('join-room', (roomId, name) => {
-        socket.join(roomId);
-        if (!rooms[roomId]) {
-            rooms[roomId] = [];
-        }
-        if (!rooms[roomId].includes(name)) {
-            rooms[roomId].push(name);
-            io.to(roomId).emit('user-connected', { message: name });
-            console.log(`Пользователь ${name} присоединился к комнате ${roomId}, массив ${rooms}`);
-        }
-    });
-
-    socket.on('send-message', (data) => {
-        const { roomId, message } = data;
-        console.log('msg', message)
-        console.log(`Пользователь ${socket.id} отправил сообщение: "${message}" в комнату ${roomId}`);
-        io.to(roomId).emit('receive-message', message);
-    });
-
-    socket.on('disconnect', () => {
-        console.log(`Пользователь ${socket.id} отключен`);
-        for (const roomId in rooms) {
-            rooms[roomId] = rooms[roomId].filter(id => id !== socket.id);
-        }
-    });
-});
+// io.on('connection', (socket) => {
+//     socket.emit('initial-messages', messages);
+//
+//     socket.on('join-room', (roomId, name) => {
+//         socket.join(roomId);
+//         if (!rooms[roomId]) {
+//             rooms[roomId] = [];
+//         }
+//         if (!rooms[roomId].includes(name)) {
+//             rooms[roomId].push(name);
+//             io.to(roomId).emit('user-connected', { message: name });
+//             console.log(`Пользователь ${name} присоединился к комнате ${roomId}, массив ${rooms}`);
+//         }
+//     });
+//
+//     socket.on('send-message', (data) => {
+//         const { roomId, message } = data;
+//         console.log('msg', message)
+//         console.log(`Пользователь ${socket.id} отправил сообщение: "${message}" в комнату ${roomId}`);
+//         io.to(roomId).emit('receive-message', message);
+//     });
+//
+//     socket.on('disconnect', () => {
+//         console.log(`Пользователь ${socket.id} отключен`);
+//         for (const roomId in rooms) {
+//             rooms[roomId] = rooms[roomId].filter(id => id !== socket.id);
+//         }
+//     });
+// });
 
 server.listen(3000, () => {
     console.log('Сервер запущен на порту 3000');
