@@ -78,3 +78,5 @@ io.on('connection', (socket) => {
 server.listen(3000, () => {
     console.log('Сервер запущен на порту 3000');
 });
+
+module.exports = app;
