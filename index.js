@@ -84,8 +84,8 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is listening on http://0.0.0.0:${PORT}`);
+server.listen(PORT,() => {
+    console.log(`Server is listening on ${PORT}`);
 });
 
 module.exports = app;
