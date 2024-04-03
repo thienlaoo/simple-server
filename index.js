@@ -3,7 +3,7 @@ const axios = require('axios');
 const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
-
+const PORT = process.env.PORT || 3000;
 const app = express();
 const server = http.createServer(app);
 const options = [
@@ -84,8 +84,8 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(3000, () => {
-    console.log('Сервер запущен на порту 3000');
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is listening on http://0.0.0.0:${PORT}`);
 });
 
 module.exports = app;
